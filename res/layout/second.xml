@@ -29,6 +29,18 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/deviceInterfaceCount"/>
 		</TableRow>
+		<TableRow>     
+	        <TextView
+		        android:layout_width="150dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/deviceName" />
+	        <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/deviceInterfaceCount"/>
+		</TableRow>
+	</TableLayout>
+	    <!-- 
 		<TableRow>
 		   	<Button
 		        android:id="@+id/dev0"
@@ -84,5 +96,5 @@
    	    android:layout_height="wrap_content"
 		android:text="@string/exit"
 		android:onClick="onClick2" />
-	
+			-->
 </LinearLayout>

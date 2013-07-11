@@ -15,6 +15,7 @@ import android.view.View;
 
 public class Main extends Activity {
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,24 +30,23 @@ public class Main extends Activity {
 	}
 
 	@SuppressLint("NewApi")
-	public void onClick(View view) {
-		
+	public void onClick(View view) {		
 		UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
 		HashMap<String, UsbDevice> deviceList = manager.getDeviceList();
 		Iterator<UsbDevice> deviceIterator = deviceList.values().iterator();
-		Intent i = new Intent("com.example.Second");
+		Intent i = new Intent(this, Second.class);
 		
 		Bundle data = new Bundle();
 		int howMany = deviceList.size();
 		data.putInt("howMany", howMany);
+		
 				
 		while (deviceIterator.hasNext()) {
 		    UsbDevice device = deviceIterator.next();
-		    //PendingIntent mPermissionIntent = PendingIntent.getBroadcast(this, 1, i, 0);
-		    //if (manager.hasPermission(device) == false) manager.requestPermission(device, mPermissionIntent); //???
 		    data.putString("device" + howMany + "Name", device.getDeviceName());
 		    data.putInt("device" + howMany + "InterfaceCount", device.getInterfaceCount());
 		    }
+		i.putExtras(data);
 		startActivityForResult(i, 1);
 	}
 }
