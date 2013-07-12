@@ -31,13 +31,14 @@ public class Main extends Activity {
 
 	@SuppressLint("NewApi")
 	public void onClick(View view) {		
+		Intent third = new Intent(this, Third.class);
+		
 		UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
 		HashMap<String, UsbDevice> deviceList = manager.getDeviceList();
 		Iterator<UsbDevice> deviceIterator = deviceList.values().iterator();
 		Intent i = new Intent(this, Second.class);
-		
 		Bundle data = new Bundle();
-		/*
+		// /*
 		int howMany = deviceList.size();
 		data.putInt("howMany", howMany);
 		
@@ -48,15 +49,21 @@ public class Main extends Activity {
 		    data.putInt("device" + k + "InterfaceCount", device.getInterfaceCount());
 		    k++;
 		    }
-		*/
+		// */
+		
+	/*	
 		int howMany = 1;
 		data.putInt("howMany", howMany);
 		data.putString("device" + 1 + "Name", "USB DEVICE NO1");
 	    data.putInt("device" + 1 + "InterfaceCount", 2);
-		//prosty test
 	    
-	    
-		i.putExtras(data);
+		//PROSTY I SKUTECZNY TEST NA DZIALANIE SECOND ACTIVITY
+	*/   
+	   	i.putExtras(data);
+	   	i.putExtra("deviceList", deviceList);
+	   	third.putExtras(data);
+	   	third.putExtra("deviceList", deviceList);
+	   	sendBroadcast(third);
 		startActivityForResult(i, 1);
 	}
 }

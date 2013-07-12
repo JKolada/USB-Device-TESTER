@@ -24,9 +24,18 @@
         </activity>
         <activity 
             android:name="Second"
-            android:label=".Second">
+            android:label="Device List">
             <intent-filter >
                 <action android:name="com.example.Second"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        
+        <activity 
+            android:name="Third"
+            android:label="Interface List">
+            <intent-filter >
+                <action android:name="com.example.Third"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
