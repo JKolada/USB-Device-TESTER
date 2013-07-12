@@ -2,23 +2,7 @@
 <resources>
 
     <string name="app_name">My Devices</string>
-    <string name="action_settings">Settings</string>
-    <string name="device">My Devices</string>
+    <string name="action_settings">Srettings</string>
     <string name="get">Get device list</string>
-    <string name="refresh">Refresh device list</string>
-    <string name="exit">Exit</string>
-    <string name="deviceName">Device Name\n(click to open an interface list)</string>
-    <string name="deviceInterfaceCount">Interface\nCount</string>
-    
-    <string name="device0Name">no device</string>
-    <string name="device1Name">no device2</string>
-    <string name="device2Name">no device3</string>
-    <string name="device3Name">no device4</string>
-    <string name="device0InterfaceCount">1</string>
-    <string name="device1InterfaceCount">2</string>
-    <string name="device2InterfaceCount">3</string>
-    <string name="device3InterfaceCount">4</string>
-
-    <string name="str">str</string>
     
 </resources>

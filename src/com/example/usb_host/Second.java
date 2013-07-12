@@ -50,10 +50,10 @@ public class Second extends Activity{
 		LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		
 		Button refresh = new Button(this);
-		refresh.setText("Click to refresh the device list");
+		refresh.setText("Click to refresh the device list\nRefreshing doesn't work for now :P");
 		refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	onRestart();
+            	onCreate(InstanceState);
             }
 		});
 		refresh.setLayoutParams(p);
@@ -101,8 +101,4 @@ public class Second extends Activity{
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
-	public void onClick(View view) {this.onCreate(InstanceState);}
-	public void onClick2(View view) {super.finishAffinity();}
-
 }
