@@ -37,15 +37,25 @@ public class Main extends Activity {
 		Intent i = new Intent(this, Second.class);
 		
 		Bundle data = new Bundle();
+		/*
 		int howMany = deviceList.size();
 		data.putInt("howMany", howMany);
 		
-				
+		int k=1;		
 		while (deviceIterator.hasNext()) {
 		    UsbDevice device = deviceIterator.next();
-		    data.putString("device" + howMany + "Name", device.getDeviceName());
-		    data.putInt("device" + howMany + "InterfaceCount", device.getInterfaceCount());
+		    data.putString("device" + k + "Name", device.getDeviceName());
+		    data.putInt("device" + k + "InterfaceCount", device.getInterfaceCount());
+		    k++;
 		    }
+		*/
+		int howMany = 1;
+		data.putInt("howMany", howMany);
+		data.putString("device" + 1 + "Name", "USB DEVICE NO1");
+	    data.putInt("device" + 1 + "InterfaceCount", 2);
+		//prosty test
+	    
+	    
 		i.putExtras(data);
 		startActivityForResult(i, 1);
 	}
