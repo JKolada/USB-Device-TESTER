@@ -2,14 +2,11 @@ package com.example.usb_host;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +14,6 @@ public class Second extends Activity{
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.second);
 		
 		Bundle data = getIntent().getExtras();
 		int howMany = data.getInt("howMany");
@@ -25,74 +21,65 @@ public class Second extends Activity{
 		
 		int[] interfaceCount = null;
 		String[] DeviceName = null;
+		
+		Button[] btn = null; 
+		TextView[] tv = null;
+		LinearLayout[] layout = null;
+				
 		if (howMany>0) {
 			interfaceCount = new int[howMany];
 			DeviceName = new String[howMany];
+			btn = new Button[howMany];
+			tv = new TextView[howMany];
+			layout= new LinearLayout[howMany];
 		}
+		
+		LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		@SuppressWarnings("deprecation")
+		LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,	LayoutParams.WRAP_CONTENT);
+		Button refresh = new Button(getApplicationContext());
+		refresh.setText("Click to refresh the device list");
+		refresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	onRestart();
+            }
+		});
+		LinearLayout refresh_layout = new LinearLayout(getApplicationContext());
+		refresh_layout.setOrientation(LinearLayout.VERTICAL);
+		refresh_layout.addView(refresh);
+		this.setContentView(refresh_layout, layoutParams);
+		
+		
 		for (int k=0; k<howMany; k++) {
 			interfaceCount[k] = data.getInt("device" + howMany + "Name");
 			DeviceName[k] = data.getString("device" + howMany + "Name");
+			
+			btn[k] = new Button(getApplicationContext());
+			btn[k].setText(DeviceName[k]);
+			btn[k].setLayoutParams(params);
+			
+			tv[k] = new TextView(getApplicationContext());
+			tv[k].setText(DeviceName[k]);
+			tv[k].setLayoutParams(params);
+			
+			layout[k].setOrientation(LinearLayout.HORIZONTAL);
+			layout[k].addView(btn[k]);
+			layout[k].addView(tv[k]);
+			
+			this.addContentView(layout[k], layoutParams);
 		}
 		
-
-		//JUST AN EXAMPLE
-		
-		LayoutParams params = new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		TableLayout layout = new TableLayout(getApplicationContext());
-		layout.setOrientation(TableLayout.VERTICAL);
-		
-		TextView tv = new TextView(getApplicationContext());
-		tv.setText("example");
-		tv.setLayoutParams(params);
-		
-		TextView tv2 = new TextView(getApplicationContext());
-		tv2.setText("example2");
-		tv2.setLayoutParams(params);
-		
-		TableRow row1 = new TableRow(getApplicationContext());
-		row1.addView(tv);
-		row1.addView(tv2);
-		row1.setActivated(true);
-		
-		layout.addView(row1);
-		TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		//setContentView(layout, layoutParams);
-		
-		
-		//---param for views---
-		@SuppressWarnings("deprecation")
-		LayoutParams params2 =
-		new LinearLayout.LayoutParams(
-		LayoutParams.FILL_PARENT,
-		LayoutParams.WRAP_CONTENT);
-		//---create a layout---
-		LinearLayout layout1 = new LinearLayout(this);
-		layout1.setOrientation(LinearLayout.VERTICAL);
-		//---create a textview---
-		TextView tv1 = new TextView(this);
-		tv1.setText("This is a TextView");
-		tv1.setLayoutParams(params2);
-		//---create a button---
-		Button btn = new Button(this);
-		btn.setText("This is a Button");
-		btn.setLayoutParams(params2);
-		//---adds the textview---
-		layout1.addView(tv1);
-		//---adds the button---
-		layout1.addView(btn);
-		//---create a layout param for the layout---
-		@SuppressWarnings("deprecation")
-		LinearLayout.LayoutParams layoutParam =
-		new LinearLayout.LayoutParams(
-		LayoutParams.FILL_PARENT,
-		LayoutParams.WRAP_CONTENT );
-		this.addContentView(layout1, layoutParam);
-
-		
-		
-		
-		
-		Log.d("tag", "after everything");
+		Button exit = new Button(getApplicationContext());
+		exit.setText("Exit");
+		exit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	finishAffinity();
+            }
+		});
+		LinearLayout exit_layout = new LinearLayout(getApplicationContext());
+		exit_layout.setOrientation(LinearLayout.VERTICAL);
+		exit_layout.addView(exit);
+		this.addContentView(exit_layout, layoutParams);
 	}
 
 	@Override
