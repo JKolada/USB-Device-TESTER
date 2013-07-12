@@ -16,15 +16,20 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// MOST IMPORTANT ACTIVITY
 public class Third extends Activity{
+	private final float ENDPOINT_TEXT_SIZE_f = 10.0f;
+	private final float INTERFACE_TEXT_SIZE_f = 15.0f;
 	private String DeviceName = null;
 	private UsbDevice TheDevice=null;
 	private UsbInterface UsbIntTable[] = null;
 	private String UsbIntName[] = null;
 	private int usbIntEndCount[] = null;
+	private int usbAllEndCount = 0;
 	private int interfaceCount = 0;
 	
 	@SuppressLint("NewApi")
@@ -65,7 +70,8 @@ public class Third extends Activity{
 			TextView e = new TextView(this);
 			LinearLayout layout = new LinearLayout(this);
 			layout.setOrientation(LinearLayout.VERTICAL);
-			LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+			@SuppressWarnings("deprecation")
+			LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 			e.setText("Error: Device = null");
 			e.setLayoutParams(p);
 			e.setGravity(Gravity.CENTER);
@@ -84,6 +90,7 @@ public class Third extends Activity{
 					UsbIntTable[k] = TheDevice.getInterface(k);
 					UsbIntName[k] = UsbIntTable[k].toString();
 					usbIntEndCount[k] = UsbIntTable[k].getEndpointCount();
+					usbAllEndCount += usbIntEndCount[k];
 				}
 			}
 			
@@ -92,24 +99,29 @@ public class Third extends Activity{
 			
 			///////////////////////////////////////////////// INTERFACE
 			
+	    	ScrollView scroll_view = new ScrollView(this);  	
+	    	
+	    	
 			LinearLayout layout = new LinearLayout(this);
 			layout.setOrientation(LinearLayout.VERTICAL);
-			LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);	
+			@SuppressWarnings("deprecation")
+			LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);	
 			
 			TextView NameTV = new TextView(this);
-			NameTV.setText("Device Name: " + DeviceName);
-			LayoutParams q = p; 
-			// jakos bolda by sie zdalo zrobic
-			NameTV.setLayoutParams(q);
+			NameTV.setText("Device Name:\n" + DeviceName + "\nnumber of interfaces: "
+					+ interfaceCount + "\nnumber of all endpoints: " + usbAllEndCount);
+			NameTV.setTextSize(25.0f);
+			NameTV.setLayoutParams(p);
 			NameTV.setGravity(Gravity.CENTER);
 			layout.addView(NameTV);
 					
 			TextView tv[] = new TextView[interfaceCount];
 			for (k=0; k<interfaceCount; k++) {
 				tv[k] = new TextView(this);
-				tv[k].setText("Name of inteface: " + UsbIntName + "\n		number of endpoints: " + usbIntEndCount[k] +"\n\n");
-				tv[k].setLayoutParams(p);
+				tv[k].setText("\n\tName of interface:\n\t" + UsbIntName + "\n\tnumber of endpoints: " + usbIntEndCount[k]);
+				tv[k].setTextSize(INTERFACE_TEXT_SIZE_f);
 				tv[k].setGravity(Gravity.CENTER);
+				tv[k].setLayoutParams(p);				
 				layout.addView(tv[k]);
 				
 				Button btn[] = new Button[usbIntEndCount[k]];
@@ -118,11 +130,13 @@ public class Third extends Activity{
 					btn[i].setText(UsbIntTable[i].toString());
 					btn[i].setOnClickListener(new View.OnClickListener() { public void onClick(View v)
 																				{/*tu onCLLICK*/ finishAffinity();}});
-			        btn[i].setLayoutParams(p);
+			        btn[i].setTextSize(ENDPOINT_TEXT_SIZE_f);
+					btn[i].setLayoutParams(p);
 			        layout.addView(btn[i]); 
 				}
 			}
-			this.setContentView(layout);
+			scroll_view.addView(layout);
+			this.setContentView(scroll_view);
 		}
 	}
 		

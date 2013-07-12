@@ -14,7 +14,8 @@ import android.view.Menu;
 import android.view.View;
 
 public class Main extends Activity {
-
+	private int allInterfaceNumber = 0;
+	
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,14 @@ public class Main extends Activity {
 		while (deviceIterator.hasNext()) {
 		    UsbDevice device = deviceIterator.next();
 		    data.putString("device" + k + "Name", device.getDeviceName());
-		    data.putInt("device" + k + "InterfaceCount", device.getInterfaceCount());
+		    int temp = device.getInterfaceCount();
+		    data.putInt("device" + k + "InterfaceCount", temp);
+		    allInterfaceNumber += temp;
 		    k++;
 		    }
+		data.putInt("allInterfaceNumber", allInterfaceNumber);
+		
+		
 		// */
 		
 	/*	
@@ -61,8 +67,8 @@ public class Main extends Activity {
 	*/   
 	   	i.putExtras(data);
 	   	i.putExtra("deviceList", deviceList);
-	   	third.putExtras(data);
-	   	third.putExtra("deviceList", deviceList);
+	   	//third.putExtras(data);
+	    //third.putExtra("deviceList", deviceList);
 	   	sendBroadcast(third);
 		startActivityForResult(i, 1);
 	}

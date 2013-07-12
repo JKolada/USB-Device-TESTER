@@ -16,8 +16,8 @@ public class Second extends Activity{
 	private Bundle data;
 	private Intent intent;
 	private Intent third;
-	private int k=1; /*Activity finish with the pressed Button (in 'for' loop), 
-						then 'k' is transfer to the next activity (Third.java)*/
+	private int k=1; /*Activity finishes with the pressed Button (in 'for' loop), 
+				then 'k' is transfer to the next activity (Third.java) as index of wanted device*/
 	private Bundle InstanceState = null;
 	public Bundle getData() {return data;}
 	public int getK() {return k;}
@@ -30,41 +30,53 @@ public class Second extends Activity{
 		data = intent.getExtras();
 		
 		int howMany = data.getInt("howMany");
-		Toast.makeText(this, "Number of devices  = " + howMany, Toast.LENGTH_LONG).show();	
+		int allInterfaceNumber = data.getInt("allInterfaceNumber");
+		Toast.makeText(this, "number of devices: " + howMany + "\nnumber of interfaces: "
+							+ allInterfaceNumber, Toast.LENGTH_LONG).show();	
 		
 		int[] interfaceCount = null;
 		String[] DeviceName = null;
 		
 		Button[] btn = null; 
-		TextView[] tv = null;
 				
 		if (howMany>0) {
 			interfaceCount = new int[howMany];
 			DeviceName = new String[howMany];
 			btn = new Button[howMany];
-			tv = new TextView[howMany];
 		}
 		
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
-		LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		@SuppressWarnings("deprecation")
+		LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		
+		/*
 		Button refresh = new Button(this);
 		refresh.setText("Click to refresh the device list\nRefreshing doesn't work for now :P");
 		refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            	onCreate(InstanceState);
+            	Intent back = new Intent(this, Main.class);
+            	startActivity(back);
             }
 		});
 		refresh.setLayoutParams(p);
 		layout.addView(refresh);
+		*/
+		
+		TextView numbers = new TextView(this);
+		numbers.setText("number of all devices: " + howMany + "\nnumber of all interfaces: " + allInterfaceNumber);
+		numbers.setGravity(Gravity.CENTER);
+		numbers.setTextSize(10.0f);
+		numbers.setLayoutParams(p);
+		layout.addView(numbers);
 		
 		for (k=1; k<=howMany; k++) {
 			interfaceCount[k-1] =  data.getInt("device" + k + "InterfaceCount");
 			DeviceName[k-1] = data.getString("device" + 1 + "Name");
 			
 			btn[k-1] = new Button(this);
-			btn[k-1].setText(DeviceName[k-1]);
+			btn[k-1].setText("Device name:\n" + DeviceName[k-1] +
+						"\nnumber of available interfaces: " +interfaceCount[k-1]);
 			btn[k-1].setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	Intent transfer = getIntent();
@@ -75,19 +87,13 @@ public class Second extends Activity{
 	            }
 			});
 			btn[k-1].setLayoutParams(p);
-						
-			tv[k-1] = new TextView(this);
-			tv[k-1].setText("number of available interfaces: " +interfaceCount[k-1]);
-			tv[k-1].setLayoutParams(p);
-			tv[k-1].setGravity(Gravity.CENTER);
-						
 			layout.addView(btn[k-1]);
-			layout.addView(tv[k-1]);
 		}
 		
 		Button exit = new Button(this);
 		exit.setText("Exit");
 		exit.setOnClickListener(new View.OnClickListener() {public void onClick(View v) { finishAffinity(); } });
+		exit.setGravity(Gravity.CENTER);
 		exit.setLayoutParams(p);
 		layout.addView(exit);
 		
