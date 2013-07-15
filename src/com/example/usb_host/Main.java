@@ -43,13 +43,14 @@ public class Main extends Activity {
 		int howMany = deviceList.size();
 		data.putInt("howMany", howMany);
 		
-		int k=1;		
+		int k=1;
+		allInterfaceNumber=0;
 		while (deviceIterator.hasNext()) {
 		    UsbDevice device = deviceIterator.next();
 		    data.putString("device" + k + "Name", device.getDeviceName());
 		    int temp = device.getInterfaceCount();
-		    data.putInt("device" + k + "InterfaceCount", temp);
 		    allInterfaceNumber += temp;
+		    data.putInt("device" + k + "InterfaceCount", temp);
 		    k++;
 		    }
 		data.putInt("allInterfaceNumber", allInterfaceNumber);

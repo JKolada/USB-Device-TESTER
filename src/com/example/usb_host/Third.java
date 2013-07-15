@@ -71,7 +71,8 @@ public class Third extends Activity{
 			LinearLayout layout = new LinearLayout(this);
 			layout.setOrientation(LinearLayout.VERTICAL);
 			@SuppressWarnings("deprecation")
-			LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+			p.setMargins(20, 20, 20, 0);
 			e.setText("Error: Device = null");
 			e.setLayoutParams(p);
 			e.setGravity(Gravity.CENTER);
@@ -105,8 +106,8 @@ public class Third extends Activity{
 			LinearLayout layout = new LinearLayout(this);
 			layout.setOrientation(LinearLayout.VERTICAL);
 			@SuppressWarnings("deprecation")
-			LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);	
-			
+			LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);	
+			p.setMargins(10, 10, 10, 0);
 			TextView NameTV = new TextView(this);
 			NameTV.setText("Device Name:\n" + DeviceName + "\nnumber of interfaces: "
 					+ interfaceCount + "\nnumber of all endpoints: " + usbAllEndCount);

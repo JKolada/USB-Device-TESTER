@@ -48,7 +48,8 @@ public class Second extends Activity{
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		@SuppressWarnings("deprecation")
-		LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		p.setMargins(20, 20, 20, 0);
 		
 		/*
 		Button refresh = new Button(this);
@@ -96,6 +97,7 @@ public class Second extends Activity{
 		exit.setGravity(Gravity.CENTER);
 		exit.setLayoutParams(p);
 		layout.addView(exit);
+	
 		
 		this.setContentView(layout);
 		
