@@ -78,15 +78,20 @@ public class Second extends Activity{
 			btn[k-1] = new Button(this);
 			btn[k-1].setText("Device name:\n" + DeviceName[k-1] +
 						"\nnumber of available interfaces: " +interfaceCount[k-1]);
+			btn[k-1].setId(k-1);
+			//OwnListener temp = new OwnListener(getIntent(), third , k-1, this);
+			//btn[k-1].setOnClickListener(temp);
+			
 			btn[k-1].setOnClickListener(new View.OnClickListener() {
 	            public void onClick(View v) {
 	            	Intent transfer = getIntent();
 	            	Bundle data2 = transfer.getExtras();
-	            	data2.putInt("whichDevice", getK()-1);
+	            	data2.putInt("whichDevice", getK());
 	            	third.putExtras(data2);	            	
 	            	startActivityForResult(third, 1);
 	            }
 			});
+			
 			btn[k-1].setLayoutParams(p);
 			layout.addView(btn[k-1]);
 		}

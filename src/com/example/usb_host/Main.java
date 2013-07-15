@@ -63,6 +63,7 @@ public class Main extends Activity {
 		data.putInt("howMany", howMany);
 		data.putString("device" + 1 + "Name", "USB DEVICE NO1");
 	    data.putInt("device" + 1 + "InterfaceCount", 2);
+	    data.putInt("allInterfaceNumber", 2);
 	    
 		//PROSTY I SKUTECZNY TEST NA DZIALANIE SECOND ACTIVITY
 	*/   

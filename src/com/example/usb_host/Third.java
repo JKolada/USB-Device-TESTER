@@ -110,7 +110,7 @@ public class Third extends Activity{
 			p.setMargins(10, 10, 10, 0);
 			TextView NameTV = new TextView(this);
 			NameTV.setText("Device Name:\n" + DeviceName + "\nnumber of interfaces: "
-					+ interfaceCount + "\nnumber of all endpoints: " + usbAllEndCount);
+					+ interfaceCount + "\nnumber of all endpoints: " + usbAllEndCount + "\nClick to specific endopoint to open a connection on it.");
 			NameTV.setTextSize(25.0f);
 			NameTV.setLayoutParams(p);
 			NameTV.setGravity(Gravity.CENTER);
@@ -129,11 +129,16 @@ public class Third extends Activity{
 				for (int i=0; i<usbIntEndCount[k]; i++) {
 					btn[i] = new Button(this);
 					btn[i].setText(UsbIntTable[i].toString());
-					btn[i].setOnClickListener(new View.OnClickListener() { public void onClick(View v)
-																				{/*tu onCLLICK*/ finishAffinity();}});
+					btn[i].setOnClickListener(new View.OnClickListener() {
+									   public void onClick(View v)	{
+										   		/*tu onCLLICK*/ finishAffinity();
+										   		
+										   		
+									   }});
 			        btn[i].setTextSize(ENDPOINT_TEXT_SIZE_f);
 					btn[i].setLayoutParams(p);
-			        layout.addView(btn[i]); 
+			        layout.addView(btn[i]);
+			        
 				}
 			}
 			scroll_view.addView(layout);
